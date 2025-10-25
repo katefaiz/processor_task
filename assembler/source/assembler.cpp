@@ -309,6 +309,7 @@ Assembler_err disasm_commands_data(int program[]) { // проверка ассе
                 printf("ERROR!!!\n");          
         }      
     }
+    
     return ASS_NO_ERROR;
 }
 
