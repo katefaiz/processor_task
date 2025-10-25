@@ -24,6 +24,7 @@ int main(int argc, char *argv[]) {
         printf("Ошибка чтения бфйткода\n");
         return 1;
     }
+    
     err = run_bytecode(&processor);
     if (err != NO_ERROR) {
         printf("Ошибка исполнения байткода\n");
