@@ -9,6 +9,7 @@ struct Assembler {
     char source_file[50]; //commands_data_curcle.txt //commands_data_kvadratka.txt
     char output_file[50];     // выходной файл
 };
+
 enum Registers_name { 
     ROX = 0, //для ошибок
     RAX = 1,
