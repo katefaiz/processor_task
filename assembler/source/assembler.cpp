@@ -146,8 +146,8 @@ Assembler_err second_pass(Assembler *assembler, FILE *filestream) {
 Assembler_err assembler_compile(Assembler *assembler, const char *source_file, const char *output_file) {
     assert(assembler != NULL);
 
-    strncpy(assembler->source_file, source_file, sizeof(assembler->source_file) - 1);
-    strncpy(assembler->output_file, output_file, sizeof(assembler->output_file) - 1);//xnj&&&&&&&&&&&&&&&&&&&
+    strncpy(assembler->source_file, source_file, sizeof(assembler->source_file) - 1);//strncpy(куда копируем, откуда, максимальное количество символов для копирования)
+    strncpy(assembler->output_file, output_file, sizeof(assembler->output_file) - 1);
     FILE *filestream = fopen(assembler->source_file, "r");
     if (filestream == NULL) 
         return ASS_OPENFILE_ERROR;
@@ -309,7 +309,7 @@ Assembler_err disasm_commands_data(int program[]) { // проверка ассе
                 printf("ERROR!!!\n");          
         }      
     }
-    
+
     return ASS_NO_ERROR;
 }
 
