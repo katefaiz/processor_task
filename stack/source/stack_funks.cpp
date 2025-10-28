@@ -22,7 +22,7 @@ Stack_err_t stack_pop(Stack_t *stk, type_t *value) {
     }
     *value = (stk -> data[stk -> size - 1]);
     stk -> data[stk -> size - 1] = POIZON;
-    stk -> size--; // TODO: лучше поменять это местами
+    stk -> size--; 
     
 
     err = stack_verify(stk);
@@ -97,7 +97,7 @@ Stack_err_t stack_destroy(Stack_t *stk) {
     Stack_err_t err = stack_verify(stk);
     if (err != STACK_NO_ERROR) {
         stack_dump(stk, err);
-            return err;
+        return err;
     }
     
     free(stk -> data);
