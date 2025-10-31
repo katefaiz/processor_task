@@ -205,55 +205,27 @@ Assembler_err assembler_destroy(Assembler *assembler) {
 }
 
 Commands comparing_commands(const char *command) { 
-    if (strcmp(command, "PUSH") == 0)
-        return PUSH;
-    if (strcmp(command, "ADD") == 0)    
-        return ADD;
-    if (strcmp(command, "SUB") == 0)    
-        return SUB;
-    if (strcmp(command, "MUL") == 0)    
-        return MUL;
-    if (strcmp(command, "DIV") == 0)    
-        return DIV;
-    if (strcmp(command, "OUT") == 0)    
-        return OUT;
-    if (strcmp(command, "HLT") == 0)    
-        return HLT;
-    if (strcmp(command, "SQRT") == 0)   
-        return SQRT;
-    if (strcmp(command, "POPR") == 0)   
-        return POPR;
-    if (strcmp(command, "PUSHR") == 0)   
-        return PUSHR;
-    if (strcmp(command, "JMP") == 0)    
-        return JMP;
-    if (strcmp(command, "CALL") == 0)   
-        return CALL;   
-    if (strcmp(command, "RET") == 0)    
-        return RET;
-    if (strcmp(command, "POPM") == 0)   
-        return POPM;
-    if (strcmp(command, "PUSHM") == 0)   
-        return PUSHM;
-    if (strcmp(command, "DRAW") == 0)   
-        return DRAW;
-    else                                
-        return ERROR;
+    Command_struct commands_arr[] = {{"PUSH", PUSH}, {"ADD", ADD}, {"SUB", SUB}, {"MUL", MUL}, {"DIV", DIV}, {"OUT", OUT}, {"HLT", HLT}, {"SQRT", SQRT}, {"POPR", POPR}, {"PUSHR", PUSHR}, {"JMP", JMP}, {"CALL", CALL}, {"RET", RET}, {"POPM", POPM}, {"PUSHM", PUSHM}, {"DRAW", DRAW}};
+    for (int i = 0; i < sizeof(commands_arr) / sizeof(Command_struct); i++) {
+        if (strcmp(commands_arr[i].name, command) == 0) {
+            return commands_arr[i].value;
+        } else {    
+            printf("Неверное имя команды\n");                            
+            return ERROR;
+        }
+    }
 }
 
 Registers_name comparing_registers(const char *reg_name) {
-
-    if (strcmp(reg_name, "RAX") == 0) 
-        return RAX;
-    if (strcmp(reg_name, "RBX") == 0) 
-        return RBX;
-    if (strcmp(reg_name, "RCX") == 0)     
-        return RCX;
-    if (strcmp(reg_name, "RDX") == 0) 
-        return RDX;
-    
-    printf("Ошибка: неизвестный регистр '%s'\n", reg_name);
-    return ROX; 
+    Register register_arr[] = {{"RAX", RAX, 0}, {"RBX", RBX, 0}, {"RCX", RCX, 0}, {"RDX", RDX, 0}};
+    for (int i = 0; i < 5; i++) {
+        if (strcmp(register_arr[i].name, reg_name) == 0) {
+            return register_arr[i].reg;
+        } else {        
+            printf("Неверное имя регистра\n");                      
+            return ROX;
+        }
+    }
 }
 
 

@@ -19,6 +19,7 @@ enum Registers_name {
 };
 
 struct Register {
+    char name[4];
     Registers_name reg; //имя 
     type_t reg_val; //значение (то, что в нем хранится)
 };
@@ -42,6 +43,12 @@ enum Commands {
     ERROR   = 666 //для ошибки
 
 };
+struct Command_struct {
+    char name[10];
+    Commands value;
+
+};
+
 enum Assembler_err {
     ASS_NO_ERROR                = 0,
     ASS_OPENFILE_ERROR          = 1,
