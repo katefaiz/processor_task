@@ -209,23 +209,21 @@ Commands comparing_commands(const char *command) {
     for (int i = 0; i < sizeof(commands_arr) / sizeof(Command_struct); i++) {
         if (strcmp(commands_arr[i].name, command) == 0) {
             return commands_arr[i].value;
-        } else {    
-            printf("Неверное имя команды\n");                            
-            return ERROR;
-        }
+        }  
     }
+    printf("Неверное имя команды\n");                            
+    return ERROR;
 }
 
 Registers_name comparing_registers(const char *reg_name) {
     Register register_arr[] = {{"RAX", RAX, 0}, {"RBX", RBX, 0}, {"RCX", RCX, 0}, {"RDX", RDX, 0}};
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < sizeof(register_arr) / sizeof(Register); i++) {
         if (strcmp(register_arr[i].name, reg_name) == 0) {
             return register_arr[i].reg;
-        } else {        
-            printf("Неверное имя регистра\n");                      
-            return ROX;
-        }
+        }         
     }
+    printf("Неверное имя регистра\n");                      
+    return ROX;
 }
 
 
