@@ -21,13 +21,13 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    err = assembler_compile(&assembler, argv[1], argv[2]);
+    err = assembler_compile(&assembler, argv[1]);
     if (err != ASS_NO_ERROR) {
         printf("Ошибка компиляции\n");
         return 1;
     }
 
-    err = assembler_save_to_file(&assembler);
+    err = assembler_save_to_file(&assembler, argv[2]);
     if (err != ASS_NO_ERROR) {
         printf("Ошибка сохранения байт-кода\n");
         return 1;

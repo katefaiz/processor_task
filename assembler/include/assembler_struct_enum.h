@@ -1,6 +1,10 @@
 #ifndef ENUMASS_H
 #define ENUMASS_H
 
+#define LABELS_CNT 20
+#define COMMANDS_CNT 16
+#define REGISTERS_CNT 4
+
 struct Assembler {
     int program[200] = {};      // байт-код программы
     int labels[50] = {};      // массив меток

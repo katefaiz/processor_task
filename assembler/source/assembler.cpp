@@ -54,7 +54,7 @@ Assembler_err first_pass(Assembler *assembler, FILE *filestream, int *code_size)
             ind++;
             int label_index = atoi(line + ind);
             
-            if (label_index >= 0 && label_index < 20) { 
+            if (label_index >= 0 && label_index < LABELS_CNT) { 
                 assembler->labels[label_index] = *code_size;
             }
         }
@@ -143,12 +143,10 @@ Assembler_err second_pass(Assembler *assembler, FILE *filestream) {
     return ASS_NO_ERROR;
 }
 
-Assembler_err assembler_compile(Assembler *assembler, const char *source_file, const char *output_file) {
+Assembler_err assembler_compile(Assembler *assembler, const char *source_file) {
     assert(assembler != NULL);
 
-    strncpy(assembler->source_file, source_file, sizeof(assembler->source_file) - 1);//strncpy(куда копируем, откуда, максимальное количество символов для копирования)
-    strncpy(assembler->output_file, output_file, sizeof(assembler->output_file) - 1);
-    FILE *filestream = fopen(assembler->source_file, "r");
+    FILE *filestream = fopen(source_file, "r");
     if (filestream == NULL) 
         return ASS_OPENFILE_ERROR;
     
@@ -178,8 +176,8 @@ Assembler_err assembler_resolve_labels(Assembler *assembler) { //из индек
     return ASS_NO_ERROR;
 }
 
-Assembler_err assembler_save_to_file(Assembler *assembler) { // записывает массив с кодом в файл
-    FILE *filestream = fopen(assembler->output_file, "w");
+Assembler_err assembler_save_to_file(Assembler *assembler,  const char *output_file) { // записывает массив с кодом в файл
+    FILE *filestream = fopen(output_file, "w");
     if (filestream == NULL) {
         printf("Ошибка открытия файла \n");
         return ASS_OPENFILE_ERROR;
@@ -205,9 +203,11 @@ Assembler_err assembler_destroy(Assembler *assembler) {
 }
 
 Commands comparing_commands(const char *command) { 
+   
     Command_struct commands_arr[] = {{"PUSH", PUSH}, {"ADD", ADD}, {"SUB", SUB}, {"MUL", MUL}, {"DIV", DIV}, {"OUT", OUT}, {"HLT", HLT}, {"SQRT", SQRT}, {"POPR", POPR}, {"PUSHR", PUSHR}, {"JMP", JMP}, {"CALL", CALL}, {"RET", RET}, {"POPM", POPM}, {"PUSHM", PUSHM}, {"DRAW", DRAW}};
-    for (int i = 0; i < sizeof(commands_arr) / sizeof(Command_struct); i++) {
+    for (int i = 0; i < COMMANDS_CNT; i++) {
         if (strcmp(commands_arr[i].name, command) == 0) {
+
             return commands_arr[i].value;
         }  
     }
@@ -217,7 +217,7 @@ Commands comparing_commands(const char *command) {
 
 Registers_name comparing_registers(const char *reg_name) {
     Register register_arr[] = {{"RAX", RAX, 0}, {"RBX", RBX, 0}, {"RCX", RCX, 0}, {"RDX", RDX, 0}};
-    for (int i = 0; i < sizeof(register_arr) / sizeof(Register); i++) {
+    for (int i = 0; i < REGISTERS_CNT; i++) {
         if (strcmp(register_arr[i].name, reg_name) == 0) {
             return register_arr[i].reg;
         }         
