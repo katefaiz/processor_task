@@ -10,8 +10,8 @@ struct Assembler {
     int labels[50] = {};      // массив меток
     int labels_count = 0;       // количество определенных меток
     int program_size = 0;       // размер байт-кода
-    char source_file[50]; //commands_data_curcle.txt //commands_data_kvadratka.txt
-    char output_file[50];     // выходной файл
+    //commands_data_curcle.txt //commands_data_kvadratka.txt
+    
 };
 
 enum Registers_name { 
